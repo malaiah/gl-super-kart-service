@@ -2,7 +2,7 @@
 import streamlit as st
 import requests
 
-st.title("___Super Kart UI__") 
+st.title("___Super Kart UI__")
 
 # Input fields for product and store data
 Product_Weight = st.number_input("Product Weight", min_value=0.0, value=12.66)
@@ -30,8 +30,8 @@ product_data = {
 }
 
 if st.button("Predict", type='primary'):
-    response = requests.post("http://backend:7860/v1/predict", json=product_data) 
-    
+    response = requests.post("http://backend:7860/v1/predict", json=product_data)
+
     if response.status_code == 200:
         result = response.json()
         predicted_sales = result["Sales"]
