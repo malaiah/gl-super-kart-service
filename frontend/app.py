@@ -2,8 +2,6 @@
 import streamlit as st
 import requests
 
-BACKEND_URL = "http://backend:7860"
-
 st.title("___Super Kart UI__") 
 
 # Input fields for product and store data
@@ -11,12 +9,12 @@ Product_Weight = st.number_input("Product Weight", min_value=0.0, value=12.66)
 Product_Sugar_Content = st.selectbox("Product Sugar Content", ["Low Sugar", "Regular", "No Sugar"])
 Product_Allocated_Area =  st.number_input("Product Allocated Area")
 Product_MRP = st.number_input("Product MRP")
-Store_Size = st.number_input("Store Size")
+Store_Size = st.selectbox("Store Size", ['Medium', 'High', 'Small'])
 Store_Location_City_Type = st.selectbox("Store Location City Type", ["Tier 1", "Tier 2", "Tier 3"])
-Store_Type = st.selectbox("Store Type", ["Supermarket", "Grocery Store"])
-Product_Id_char = st.selectbox("Product Id char", ["A", "B", "C", "D", "E"])
+Store_Type = st.selectbox("Store Type", ["Supermarket Type2", "Departmental Store", "Supermarket Type1", "Food Mart"])
+Product_Id_char = st.selectbox("Product Id char", ["FD", "NC", "DR"])
 Store_Age_Years = st.number_input("Store Age Years")
-Product_Type_Category = st.selectbox("Product Type Category", ["Dairy", "Bakery", "Meat", "Fruits", "Vegetables", "Others"])
+Product_Type_Category = st.selectbox("Product Type Category", ["Perishables","Non Perishables"])
 
 product_data = {
     "Product_Weight": Product_Weight,
@@ -32,8 +30,8 @@ product_data = {
 }
 
 if st.button("Predict", type='primary'):
-    response = requests.post(f"{BACKEND_URL}/v1/predict", json=product_data.to_dict(orient='records')[0]) 
-    #response = requests.post("https://humble-couscous-w4499jqw7wfg645.github.dev/v1/predict", json=product_data)
+    response = requests.post("http://backend:7860/v1/predict", json=product_data) 
+    
     if response.status_code == 200:
         result = response.json()
         predicted_sales = result["Sales"]
