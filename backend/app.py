@@ -9,12 +9,12 @@ from flask import Flask, request, jsonify  # For creating the Flask API
 superkart_api = Flask("superkart_sales_predictor")
 
 # Load the trained churn prediction model
-model = joblib.load("xgb_tuned_model.pkl.joblib") 
+model = joblib.load("xgb_tuned_model.pkl.joblib")
 
 # Define a route for the home page
 @superkart_api.get('/')
 def home():
-    return "Welcome to the SuperKart Sales Prediction API!" 
+    return "Welcome to the SuperKart Sales Prediction API!"
 
 # Define an endpoint to predict churn for a single customer
 @superkart_api.post('/v1/predict')
