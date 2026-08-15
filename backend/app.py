@@ -9,7 +9,7 @@ from flask import Flask, request, jsonify  # For creating the Flask API
 superkart_api = Flask("superkart_sales_predictor")
 
 # Load the trained churn prediction model
-model = joblib.load("backend_files/xgb_tuned_model.pkl") 
+model = joblib.load("xgb_tuned_model.pkl.joblib") 
 
 # Define a route for the home page
 @superkart_api.get('/')
@@ -38,7 +38,7 @@ def predict_sales():
 
     # Convert the extracted data into a DataFrame
     input_data = pd.DataFrame([sample])
-
+    print (input_data)
     # Make a churn prediction using the trained model
     prediction = model.predict(input_data).tolist()[0]
 
