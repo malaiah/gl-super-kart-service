@@ -2,6 +2,8 @@
 import streamlit as st
 import requests
 
+BACKEND_URL = "http://backend:7860"
+
 st.title("___Super Kart UI__") 
 
 # Input fields for product and store data
@@ -30,7 +32,8 @@ product_data = {
 }
 
 if st.button("Predict", type='primary'):
-    response = requests.post("https://humble-couscous-w4499jqw7wfg645.github.dev/v1/predict", json=product_data)
+    response = requests.post(f"{BACKEND_URL}/v1/predict", json=product_data.to_dict(orient='records')[0]) 
+    #response = requests.post("https://humble-couscous-w4499jqw7wfg645.github.dev/v1/predict", json=product_data)
     if response.status_code == 200:
         result = response.json()
         predicted_sales = result["Sales"]
